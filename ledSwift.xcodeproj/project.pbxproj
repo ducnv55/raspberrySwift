@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8E70CCB71E655E6100A9AA42 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF0DA271E655DFA009ED27D /* Alamofire.framework */; };
+		8E70CCBC1E657DFD00A9AA42 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E70CCBB1E657DFD00A9AA42 /* SetupViewController.swift */; };
 		8EF0D9F91E655C49009ED27D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF0D9F81E655C49009ED27D /* AppDelegate.swift */; };
 		8EF0D9FB1E655C4A009ED27D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF0D9FA1E655C4A009ED27D /* ViewController.swift */; };
 		8EF0D9FE1E655C4A009ED27D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EF0D9FC1E655C4A009ED27D /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8E70CCBB1E657DFD00A9AA42 /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		8EF0D9F51E655C49009ED27D /* ledSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ledSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EF0D9F81E655C49009ED27D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EF0D9FA1E655C4A009ED27D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			children = (
 				8EF0DA1E1E655CAF009ED27D /* HomeViewController.swift */,
 				8EF0D9FA1E655C4A009ED27D /* ViewController.swift */,
+				8E70CCBB1E657DFD00A9AA42 /* SetupViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				8EF0D9F91E655C49009ED27D /* AppDelegate.swift in Sources */,
 				8EF0DA241E655CAF009ED27D /* Constant.swift in Sources */,
 				8EF0DA251E655CAF009ED27D /* HomeViewController.swift in Sources */,
+				8E70CCBC1E657DFD00A9AA42 /* SetupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

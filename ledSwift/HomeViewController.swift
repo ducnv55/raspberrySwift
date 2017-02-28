@@ -10,6 +10,9 @@ import UIKit
 import Alamofire
 
 class HomeViewController: UIViewController {
+    
+    // MARK: Properties
+    var specificIp: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +23,7 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func ledDidPressed(_ sender: Any) {
-        Alamofire.request(Constant.Url.baseUrl + Constant.Url.tapURL).responseJSON { response in
+        Alamofire.request(Constant.Url.baseUrl + specificIp + Constant.Url.tapURL).responseJSON { response in
             if let JSON = response.result.value {
                 print(JSON)
             } else {

@@ -10,7 +10,7 @@ import UIKit
 
 class Constant: NSObject {
     struct Url {
-        static let baseUrl = "http://192.168.0.240/"
-        static let tapURL = "action.php?tap=true"
+        static let baseUrl = "http://192.168.0."
+        static let tapURL = "/action.php?tap=true"
     }
 }
