@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  ledSwift
+//  Led
 //
-//  Created by Duc Nguyen Viet on 2/28/17.
-//  Copyright © 2017 Duc Nguyen Viet. All rights reserved.
+//  Created by Nguyen Viet Duc on 2/7/17.
+//  Copyright © 2017 TMH. All rights reserved.
 //
 
 import UIKit
