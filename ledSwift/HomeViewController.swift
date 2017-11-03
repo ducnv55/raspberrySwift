@@ -8,20 +8,30 @@
 
 import UIKit
 import Alamofire
+import Speech
 
 class HomeViewController: UIViewController {
     
     // MARK: Properties
     var specificIp: String = ""
+    @IBOutlet weak var voiceButton: UIButton!
+    @IBOutlet weak var voiceTextLabel: UILabel!
+    
+    let audioEngine = AVAudioEngine()
+    let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
+    let request = SFSpeechAudioBufferRecognitionRequest()
+    var recognitionTask: SFSpeechRecognitionTask?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        voiceTextLabel.text = ""
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     @IBAction func ledDidPressed(_ sender: Any) {
         Alamofire.request(Constant.Url.baseUrl + specificIp + Constant.Url.tapURL).responseJSON { response in
             if let JSON = response.result.value {
@@ -32,53 +42,41 @@ class HomeViewController: UIViewController {
         }
     }
     
-//    func setupUI() {
-//        // UI for red button
-//        if redStatus == true {
-//            redButton.backgroundColor = UIColor(red: 1, green: 23/255, blue: 0, alpha: 1)
-//        } else {
-//            redButton.backgroundColor = UIColor(red: 1, green: 23/255, blue: 0, alpha: 0.3)
-//        }
-//        // UI for yellow button
-//        if yellowStatus == true {
-//            yellowButton.backgroundColor = UIColor(red: 1, green: 216/255, blue: 0, alpha: 1)
-//        } else {
-//            yellowButton.backgroundColor = UIColor(red: 1, green: 216/255, blue: 0, alpha: 0.3)
-//        }
-//        // UI for green button
-//        if greenStatus == true {
-//            greenButton.backgroundColor = UIColor(red: 19/255, green: 1, blue: 0, alpha: 1)
-//        } else {
-//            greenButton.backgroundColor = UIColor(red: 19/255, green: 1, blue: 0, alpha: 0.3)
-//        }
-//    }
-//    
-//    func getLedStatus() -> Void {
-//        Alamofire.request(Constant.Url.baseUrl).responseJSON { response in
-//            if let JSON = response.result.value {
-//                let data = JSON as! [String: Any]
-//                self.redStatus = data["red"] as! String == "0" ? false : true
-//                
-//                self.yellowStatus = data["yellow"] as! String == "0" ? false : true
-//                
-//                self.greenStatus = data["green"] as! String == "0" ? false : true
-//                
-//                self.setupUI()
-//            } else {
-//                print(response)
-//            }
-//        }
-//    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func voiceRecognizeButtonIsClicked(_ sender: Any) {
+        self.recordAndRecognizeSpeech()
     }
-    */
-
+    
+    func recordAndRecognizeSpeech() {
+        guard let node = audioEngine.inputNode else { return }
+        let recordingFormat = node.outputFormat(forBus: 0)
+        node.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, audioTime) in
+            self.request.append(buffer)
+        }
+        
+        audioEngine.prepare()
+        do {
+            try audioEngine.start()
+        } catch {
+            return print(error)
+        }
+        
+        guard let myRecognizer = SFSpeechRecognizer() else {
+            // recognizer is not support for this locale
+            return
+        }
+        
+        if !myRecognizer.isAvailable {
+            // recognizer is available right now
+            return
+        }
+        
+        recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { (result, error) in
+            if let result = result {
+                let bestString = result.bestTranscription.formattedString
+                self.voiceTextLabel.text = bestString
+            } else {
+                print(error)
+            }
+        })
+    }
 }
